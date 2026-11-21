@@ -25,6 +25,8 @@ export function routesFor(hostname: string): Routes {
       children: [
         { path: '', component: Home, title: `${SITE.name} · Software development & AI` },
         { path: 'projects', component: ProjectsPage, title: `Projects · ${SITE.name}` },
+        { path: 'impressum', loadComponent: () => import('./portfolio/legal').then((m) => m.Impressum), title: `Impressum · ${SITE.name}` },
+        { path: 'privacy', loadComponent: () => import('./portfolio/legal').then((m) => m.Privacy), title: `Privacy policy · ${SITE.name}` },
         // Local dev only: on mrvoje.com, /plumcast redirects to plumcast.mrvoje.com before the app starts.
         { path: 'plumcast', ...plumcastPage },
       ],

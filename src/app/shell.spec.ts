@@ -42,9 +42,22 @@ describe('Shell', () => {
     const plumcast = screen.getByRole('link', { name: /Plumcast/ })
     expect(plumcast).toHaveAttribute('href', '/plumcast')
     expect(plumcast).toHaveClass('theme-purple')
-    // Impressum / privacy live in BarMint.
-    expect(screen.getByRole('link', { name: 'Impressum' })).toHaveAttribute('href', 'https://barmint.mrvoje.com/#impressum')
-    expect(screen.getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', 'https://barmint.mrvoje.com/#datenschutz')
+  })
+
+  it('has its own Impressum and privacy policy', async () => {
+    const user = userEvent.setup()
+    await open('/')
+    expect(screen.getByRole('link', { name: 'Impressum' })).toHaveAttribute('href', '/impressum')
+    await user.click(screen.getByRole('link', { name: 'Impressum' }))
+    expect(await screen.findByRole('heading', { name: 'Impressum', level: 1 })).toBeInTheDocument()
+    expect(screen.getByText(/§ 25 MedienG/)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'hmrvoje@gmail.com' })).toHaveAttribute('href', 'mailto:hmrvoje@gmail.com')
+    expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://mrvoje.com/impressum')
+
+    await user.click(screen.getByRole('link', { name: 'Privacy' }))
+    expect(await screen.findByRole('heading', { name: 'Privacy policy', level: 1 })).toBeInTheDocument()
+    expect(document.title).toBe('Privacy policy · Mrvoje')
+    expect(screen.getByRole('heading', { name: 'Hosting and server logs' })).toBeInTheDocument()
   })
 
   it('shows the Plumcast page with the download links', async () => {

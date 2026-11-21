@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { movedTo, plumcastHref } from './redirects'
+import { canonicalUrl, movedTo, plumcastHref } from './redirects'
 
 /** Where `url` goes (null: shown here). */
 const at = (url: string) => {
@@ -44,5 +44,15 @@ describe('plumcastHref', () => {
   it('is the subdomain on the live site and the route locally', () => {
     expect(plumcastHref('mrvoje.com')).toBe('https://plumcast.mrvoje.com/')
     expect(plumcastHref('localhost')).toBe('/plumcast')
+  })
+})
+
+describe('canonicalUrl', () => {
+  it('names the real address, whichever host served the page', () => {
+    expect(canonicalUrl('mrvoje.com', '/')).toBe('https://mrvoje.com/')
+    expect(canonicalUrl('white-tree-0d25f690f.6.azurestaticapps.net', '/projects?x=1#top')).toBe('https://mrvoje.com/projects')
+    expect(canonicalUrl('mrvoje.com', '/privacy/')).toBe('https://mrvoje.com/privacy')
+    expect(canonicalUrl('plumcast.mrvoje.com', '/')).toBe('https://plumcast.mrvoje.com/')
+    expect(canonicalUrl('localhost', '/plumcast')).toBe('https://plumcast.mrvoje.com/')
   })
 })

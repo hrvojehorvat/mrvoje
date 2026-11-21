@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
 import { SITE } from '../../site'
-import { BARMINT_URL, SITE_URL, isPlumcastHost } from '../redirects'
+import { SITE_URL, isPlumcastHost } from '../redirects'
 import { MrvojeLogo } from './logo'
 
 /** Portfolio frame: header with navigation, page content, footer. Neutral colours (no project accent). */
@@ -53,9 +53,14 @@ import { MrvojeLogo } from './logo'
       <footer class="mt-24 flex flex-col items-center gap-3 text-xs text-neutral-400 sm:flex-row sm:justify-between">
         <span>© {{ year }} {{ name }}</span>
         <nav aria-label="Legal" class="flex gap-4">
-          <!-- Shared legal pages live in BarMint (barmint.mrvoje.com) for now. -->
-          <a [href]="barmint + '#impressum'" class="hover:text-neutral-700 dark:hover:text-neutral-200">Impressum</a>
-          <a [href]="barmint + '#datenschutz'" class="hover:text-neutral-700 dark:hover:text-neutral-200">Privacy</a>
+          @let legalLook = 'hover:text-neutral-700 dark:hover:text-neutral-200';
+          @if (otherHost) {
+            <a [href]="site + '/impressum'" [class]="legalLook">Impressum</a>
+            <a [href]="site + '/privacy'" [class]="legalLook">Privacy</a>
+          } @else {
+            <a routerLink="/impressum" [class]="legalLook">Impressum</a>
+            <a routerLink="/privacy" [class]="legalLook">Privacy</a>
+          }
         </nav>
       </footer>
     </main>
@@ -66,7 +71,6 @@ export class PortfolioLayout {
   protected readonly year = new Date().getFullYear()
   protected readonly otherHost = isPlumcastHost()
   protected readonly site = SITE_URL
-  protected readonly barmint = BARMINT_URL
 
   constructor() {
     // The portfolio is English.

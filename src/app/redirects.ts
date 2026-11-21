@@ -40,5 +40,15 @@ export function redirectIfMoved(loc: Address & Pick<Location, 'replace'> = locat
 /** True on plumcast.mrvoje.com: the app shows only the Plumcast page. */
 export const isPlumcastHost = (hostname = location.hostname) => hostname === HOSTS.plumcast
 
+/**
+ * The one real address of a page (for <link rel="canonical">), whichever host served it: the site is
+ * also reachable at its *.azurestaticapps.net default host. `path` is the router URL; ?… and #… are dropped.
+ */
+export function canonicalUrl(hostname: string, path: string): string {
+  const page = path.split(/[?#]/)[0]
+  if (isPlumcastHost(hostname) || /^\/plumcast\/?$/.test(page)) return PLUMCAST_URL
+  return SITE_URL + (page === '/' ? '/' : page.replace(/\/+$/, ''))
+}
+
 /** Link to the Plumcast page: its own domain on the live site, the /plumcast route elsewhere (local dev). */
 export const plumcastHref = (hostname = location.hostname) => (hostname === HOSTS.site ? PLUMCAST_URL : '/plumcast')
