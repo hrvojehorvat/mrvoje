@@ -24,19 +24,3 @@ Built with Angular, TypeScript and Tailwind CSS, hosted on Azure Static Web Apps
 
 Interested in working together, or have an idea for a project? Get in touch through
 [mrvoje.com](https://mrvoje.com) or at hmrvoje@gmail.com.
-
-<details>
-<summary>For developers: run it locally</summary>
-
-Requires Node 24.
-
-```bash
-npm install
-npm run dev     # development server
-npm test        # all tests
-npm run build   # static site in dist/
-```
-
-Every push to `master` is tested, built and deployed by GitHub Actions.
-
-</details>
