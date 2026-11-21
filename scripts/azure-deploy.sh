@@ -104,6 +104,8 @@ gh workflow run deploy.yml --repo "$REPO" --ref master
 
 # =============================================================================
 # STEP 8 — Budget alert (email when costs exceed 10 % of BUDGET_EUR)
+# One budget for the whole subscription (all resource groups, BarMint's too), named "1-eur".
+# It already exists; running this again only updates it.
 # Pay-As-You-Go has no hard spending cap, so this is your safety net.
 # Email goes to the address you log in to Azure with.
 # =============================================================================
@@ -113,7 +115,7 @@ START="$(date -u +%Y-%m-01T00:00:00Z)"
 END="$(date -u -v+5y +%Y-%m-01T00:00:00Z 2>/dev/null || date -u -d '+5 years' +%Y-%m-01T00:00:00Z)"
 
 az rest --method put \
-  --url "https://management.azure.com/subscriptions/$SUB_ID/providers/Microsoft.Consumption/budgets/mrvoje-budget?api-version=2023-05-01" \
+  --url "https://management.azure.com/subscriptions/$SUB_ID/providers/Microsoft.Consumption/budgets/1-eur?api-version=2023-05-01" \
   --body "{
     \"properties\": {
       \"category\": \"Cost\",
@@ -147,4 +149,4 @@ az rest --method put \
 #
 # Remove EVERYTHING (stops all costs, deletes the site):
 #   az group delete --name "$RG" --yes
-#   az rest --method delete --url "https://management.azure.com/subscriptions/$SUB_ID/providers/Microsoft.Consumption/budgets/mrvoje-budget?api-version=2023-05-01"
+#   az rest --method delete --url "https://management.azure.com/subscriptions/$SUB_ID/providers/Microsoft.Consumption/budgets/1-eur?api-version=2023-05-01"
