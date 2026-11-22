@@ -9,6 +9,7 @@ import {
   LucideGamepad2,
   LucideHistory,
   LucideListVideo,
+  LucideMic,
   LucideSearch,
   LucideShieldCheck,
   LucideTv,
@@ -42,6 +43,7 @@ export const PLUMCAST_LINKS = {
     LucideGamepad2,
     LucideHistory,
     LucideListVideo,
+    LucideMic,
     LucideSearch,
     LucideShieldCheck,
     LucideTv,
@@ -64,15 +66,28 @@ export class Plumcast {
     { icon: 'private', title: 'Private', text: 'No account, no ads, no tracking. English, German and Croatian.' },
   ] as const
 
+  /** Plum, the voice assistant: what it understands, shown next to its screenshot. */
+  protected readonly plumPoints = [
+    'Live channels, replays, films, series and categories, from one sentence.',
+    'Knows when something aired: today, yesterday, a weekday, the evening or an exact time.',
+    'One clear match starts right away; several come as a short list to choose from.',
+    'Speech is recognized by the device’s own speech service. Plumcast itself sends nothing anywhere.',
+  ] as const
+  protected readonly plumShot = {
+    src: 'media/plumcast/tv-plum-catchup.jpg',
+    alt: 'Plum on a TV: replays of a programme from yesterday on several channels, to choose from',
+  }
+
   protected readonly tvShots = [
     { src: 'media/plumcast/tv-live.jpg', alt: 'Live TV on a TV: categories, channels with what is on now, and a small preview' },
     { src: 'media/plumcast/tv-guide.jpg', alt: 'TV guide: channels and programmes on a timeline' },
     { src: 'media/plumcast/tv-catchup.jpg', alt: 'Catch-up: replays of the last 7 days for a channel' },
     { src: 'media/plumcast/tv-movie.jpg', alt: 'A film with poster, details and the Play button' },
+    { src: 'media/plumcast/tv-plum-movies.jpg', alt: 'Plum finding films and the matching category' },
   ]
   protected readonly phoneShots = [
     { src: 'media/plumcast/phone-home.jpg', alt: 'Home on a phone: sections, recently added films and series' },
-    { src: 'media/plumcast/phone-live.jpg', alt: 'Live TV on a phone' },
+    { src: 'media/plumcast/phone-plum.jpg', alt: 'Plum on a phone' },
   ]
 
   protected async copyShort() {

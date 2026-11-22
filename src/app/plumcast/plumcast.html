@@ -69,6 +69,33 @@
   </div>
 </section>
 
+<!-- Plum, the voice assistant -->
+<section aria-labelledby="plum-title" class="pb-14">
+  <h2 class="text-xs font-semibold uppercase tracking-[0.08em] text-neutral-400 dark:text-neutral-500 mb-4">Voice</h2>
+  <div appCard class="grid items-center gap-6 p-6 lg:grid-cols-2 lg:gap-10 lg:p-8">
+    <div>
+      <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500/12 text-accent-600 dark:text-accent-400">
+        <svg lucideMic class="h-5 w-5"></svg>
+      </span>
+      <h3 id="plum-title" class="mt-4 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white">Plum, the voice assistant</h3>
+      <p class="mt-2 text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-300">
+        Open Plum from the menu and say what you want to watch, in English, German or Croatian. It searches the whole playlist,
+        including the TV guide and the provider’s catch-up archive, and starts what you meant.
+      </p>
+      <ul class="mt-4 space-y-2">
+        @for (point of plumPoints; track point) {
+          <li class="flex gap-2.5 text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-300">
+            <svg lucideCheck class="mt-1 h-4 w-4 shrink-0 text-accent-600 dark:text-accent-400"></svg>
+            <span>{{ point }}</span>
+          </li>
+        }
+      </ul>
+      <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">Needs Android’s speech recognition, so it isn’t available on Fire TV.</p>
+    </div>
+    <img [src]="plumShot.src" [alt]="plumShot.alt" width="1600" height="900" loading="lazy" class="w-full rounded-2xl bg-[#0c0a12] ring-1 ring-black/10 dark:ring-white/10" />
+  </div>
+</section>
+
 <!-- Screenshots -->
 <section aria-labelledby="shots-title" class="pb-14">
   <h2 id="shots-title" class="text-xs font-semibold uppercase tracking-[0.08em] text-neutral-400 dark:text-neutral-500 mb-4">Screenshots</h2>
@@ -123,7 +150,7 @@
         <li>Install, open Plumcast and add your playlist. You can delete the downloaded file afterwards.</li>
       </ol>
       <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
-        Works on Fire OS 6 and newer (most sticks since 2018). The newest Fire TV models with Vega OS can't install Android apps.
+        Works on Fire OS 6 and newer (most sticks since 2018). The newest Fire TV models with Vega OS can't install Android apps. Voice (Plum) isn't available on Fire TV, everything else is.
       </p>
     </div>
 
