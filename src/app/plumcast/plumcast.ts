@@ -70,7 +70,7 @@ export class Plumcast {
   protected readonly plumPoints = [
     'Live channels, replays, films, series and categories, from one sentence.',
     'Knows when something aired: today, yesterday, a weekday, the evening or an exact time.',
-    'One clear match starts right away; several come as a short list to choose from.',
+    'One clear match opens right away; several come as a short list to choose from.',
     'Speech is recognized by the device’s own speech service. Plumcast itself sends nothing anywhere.',
   ] as const
   protected readonly plumShot = {
