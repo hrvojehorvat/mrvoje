@@ -25,6 +25,7 @@ dist-ssr
 
 # Local AI assistant instructions
 CLAUDE.md
+.ai/
 
 # Angular
 /.angular/cache
